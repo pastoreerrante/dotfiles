@@ -75,6 +75,15 @@ Plugin 'tomtom/tcomment_vim'
 " easily surround tags
 Plugin 'tpope/vim-surround'
 
+" auto create tags on save for go-to functionality
+Plugin 'xolox/vim-easytags'
+
+" vim-easytags dependency
+Plugin 'xolox/vim-misc'
+
+" elixir plugin
+Plugin 'elixir-editors/vim-elixir'
+
 " All of your Plugins must be added before the following line. Required.
 call vundle#end()
 
@@ -90,20 +99,16 @@ set formatoptions=l
 set lbr
 
 " Highlight current line
-
 set cursorline 
 
 " Highlight current column
-
 set cursorcolumn 
 
 " With this command vim's working directory is always the same as the file you are
 " editing
-
 set autochdir 
 
 " Disable arrow key
-
 noremap  <Up> ""      
 noremap! <Up> <Esc>
 noremap  <Down> ""
@@ -114,7 +119,6 @@ noremap  <Right> ""
 noremap! <Right> <Esc>
 
 " override up and down movements to recognize wrapped text by remapping them to add the g key
-
 nnoremap j gj
 nnoremap k gk
 
@@ -122,20 +126,16 @@ nnoremap k gk
 nnoremap <C-a> <C-w>
 
 " map 0 to ^ in normal mode. ^ takes me to first non-white char in line 
-
 nnoremap 0 ^
 
 " Turn on syntax highlights
-
 syntax enable
 
 " highlight all search matches
-
 set hlsearch
 
 " When 'ignorecase' and 'smartcase' are both on, if a pattern contains an uppercase letter, it is case sensitive, otherwise, it is not. 
 " For example, /The would find only "The", while /the would find "the" or "The" etc. 
-
 set ignorecase
 set smartcase
 
@@ -230,10 +230,13 @@ set listchars=tab:▸\ ,eol:¬
 " set undodir=~/.vim/undo//
 
 " Tabs are four columns wide. Each indentation level is one tab.
-set tabstop=4 
-set softtabstop=4 
-set shiftwidth=4 
-set noexpandtab 
+" set tabstop=4 
+" set softtabstop=4 
+" set shiftwidth=4 
+" set noexpandtab 
+
+" For indents that consist of 4 space characters but are entered with the tab key:
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 
 " set font on windows
 set guifont=Consolas:h12
@@ -267,3 +270,13 @@ function! DoPrettyXML()
   exe "set ft=" . l:origft
 endfunction
 command! PrettyXML call DoPrettyXML()
+
+" Vim jump to the last position when reopening a file.
+" It works by creating an autocommand for the BufReadPost event 
+" -- i.e. a vim command that is executed every time after vim loads a file from disk. 
+" The command checks if the '"' mark is defined and sensible 
+" (the " mark stores the last position in the current file and is saved in the ~/.viminfo file), 
+"  and if so, tells vim to jump to it
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
