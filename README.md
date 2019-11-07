@@ -1,2 +1,3 @@
-# vimrc
-my vimrc file
+# dotfiles
+
+my personal collection of dotfiles
