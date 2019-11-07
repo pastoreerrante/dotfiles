@@ -84,6 +84,12 @@ Plugin 'xolox/vim-misc'
 " elixir plugin
 Plugin 'elixir-editors/vim-elixir'
 
+" vim-markdown dependency
+Plugin 'godlygeek/tabular'
+
+" markdown support
+Plugin 'plasticboy/vim-markdown'
+
 " All of your Plugins must be added before the following line. Required.
 call vundle#end()
 
