@@ -108,17 +108,17 @@ set formatoptions=l
 set lbr
 
 " Highlight current line
-set cursorline 
+set cursorline
 
 " Highlight current column
-set cursorcolumn 
+set cursorcolumn
 
 " With this command vim's working directory is always the same as the file you are
 " editing
-set autochdir 
+set autochdir
 
 " Disable arrow key
-noremap  <Up> ""      
+noremap  <Up> ""
 noremap! <Up> <Esc>
 noremap  <Down> ""
 noremap! <Down> <Esc>
@@ -134,8 +134,12 @@ nnoremap k gk
 " split navigations. Use the same keybindings as tmux to split
 nnoremap <C-a> <C-w>
 
-" map 0 to ^ in normal mode. ^ takes me to first non-white char in line 
+" map 0 to ^ in normal mode. ^ takes me to first non-white char in line
 nnoremap 0 ^
+
+" hitting F2 in normal mode now allows me to go at the end of a word 
+" directly in insert mode
+nnoremap <F2> ea
 
 " Turn on syntax highlights
 syntax enable
