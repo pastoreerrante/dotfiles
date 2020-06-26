@@ -41,7 +41,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'nvie/vim-flake8'
 
 " Want to search for basically anything from VIM? Check out ctrlP. 
-" CTRL P enables the search and then just start typing. 
+" CTRL P enables the search and then just start typing.
 " If your search matches anything close to the file you’re looking for, it will find it. 
 Plugin 'ctrlpvim/ctrlp.vim'
 
@@ -57,7 +57,7 @@ Plugin 'l04m33/vlime', {'rtp': 'vim/'}
 " balance parenthesis
 Plugin 'kovisoft/paredit'
 
-" enhanced tmux integration 
+" enhanced tmux integration
 Plugin 'christoomey/vim-tmux-navigator'
 
 " git integration
@@ -93,18 +93,21 @@ Plugin 'plasticboy/vim-markdown'
 " highlight useless whitespaces
 Plugin 'ntpeters/vim-better-whitespace'
 
+" antlr grammars
+Plugin 'dylon/vim-antlr'
+
 " All of your Plugins must be added before the following line. Required.
 call vundle#end()
 
 " Required
-filetype plugin indent on               
+filetype plugin indent on
 
 " Show Line numbers
-set number 
+set number
 
 " Together with 'set lbr' avoids splitting words when they need to go to the next
 " line
-set formatoptions=l 
+set formatoptions=l
 set lbr
 
 " Highlight current line
@@ -192,7 +195,7 @@ set encoding=utf-8
 "make your code look pretty
 let python_highlight_all=1
 
-" ------------------------------------- PowerLine 
+" ------------------------------------- PowerLine
 
 " set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
 
@@ -212,7 +215,7 @@ set clipboard=unnamedplus
 " make a Visual selection, you can switch to another application (such as your mail reader) and paste.
 set go+=a
 
-" ------------------------------------- 
+" -------------------------------------
 
 " faster redrawing
 set ttyfast
@@ -243,10 +246,10 @@ set listchars=tab:▸\ ,eol:¬
 " set undodir=~/.vim/undo//
 
 " Tabs are four columns wide. Each indentation level is one tab.
-" set tabstop=4 
-" set softtabstop=4 
-" set shiftwidth=4 
-" set noexpandtab 
+" set tabstop=4
+" set softtabstop=4
+" set shiftwidth=4
+" set noexpandtab
 
 " For indents that consist of 4 space characters but are entered with the tab key:
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
@@ -293,3 +296,7 @@ command! PrettyXML call DoPrettyXML()
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+
+" syntax highlight antlr grammar
+au BufRead,BufNewFile *.g set filetype=antlr3
+au BufRead,BufNewFile *.g4 set filetype=antlr4
