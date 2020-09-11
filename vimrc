@@ -105,6 +105,15 @@ filetype plugin indent on
 " Show Line numbers
 set number
 
+" make sure spacebar doesn't have any mapping beforehand
+nnoremap <SPACE> <Nop>
+
+" leaderkey is the space bar
+let mapleader=" "
+
+" enable relativenumbering by pressing the leader key + rn
+nnoremap <leader>rn :set rnu!
+
 " Together with 'set lbr' avoids splitting words when they need to go to the next
 " line
 set formatoptions=l
@@ -288,10 +297,10 @@ endfunction
 command! PrettyXML call DoPrettyXML()
 
 " Vim jump to the last position when reopening a file.
-" It works by creating an autocommand for the BufReadPost event 
-" -- i.e. a vim command that is executed every time after vim loads a file from disk. 
-" The command checks if the '"' mark is defined and sensible 
-" (the " mark stores the last position in the current file and is saved in the ~/.viminfo file), 
+" It works by creating an autocommand for the BufReadPost event
+" -- i.e. a vim command that is executed every time after vim loads a file from disk.
+" The command checks if the '"' mark is defined and sensible
+" (the " mark stores the last position in the current file and is saved in the ~/.viminfo file),
 "  and if so, tells vim to jump to it
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -300,3 +309,4 @@ endif
 " syntax highlight antlr grammar
 au BufRead,BufNewFile *.g set filetype=antlr3
 au BufRead,BufNewFile *.g4 set filetype=antlr4
+
