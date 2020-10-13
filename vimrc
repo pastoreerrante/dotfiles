@@ -8,7 +8,7 @@ set nocompatible
 " alters the runtime environment. We will change this back later
 filetype off
 
-" We'll need to then adjust vim's runtime path to include the vundle location we 
+" We'll need to then adjust vim's runtime path to include the vundle location we
 " cloned from GitHub
 set rtp+=~/.vim/bundle/Vundle.vim
 
@@ -31,6 +31,9 @@ Plugin 'Buffergator'
 " Solarized color scheme
 Plugin 'altercation/vim-colors-solarized'
 
+" gruvbox color scheme
+Plugin 'morhetz/gruvbox'
+
 " Zenburn color scheme for terminal mode
 Plugin 'jnurmine/Zenburn'
 
@@ -40,9 +43,9 @@ Plugin 'scrooloose/syntastic'
 " PEP8 checking
 Plugin 'nvie/vim-flake8'
 
-" Want to search for basically anything from VIM? Check out ctrlP. 
+" Want to search for basically anything from VIM? Check out ctrlP.
 " CTRL P enables the search and then just start typing.
-" If your search matches anything close to the file you’re looking for, it will find it. 
+" If your search matches anything close to the file you’re looking for, it will find it.
 Plugin 'ctrlpvim/ctrlp.vim'
 
 " Lean & Mean Powerline written in vimscript
@@ -96,6 +99,9 @@ Plugin 'ntpeters/vim-better-whitespace'
 " antlr grammars
 Plugin 'dylon/vim-antlr'
 
+" automatically show vim autocomplete menu while typing
+Plugin 'vim-scripts/AutoComplPop'
+
 " All of your Plugins must be added before the following line. Required.
 call vundle#end()
 
@@ -112,7 +118,10 @@ nnoremap <SPACE> <Nop>
 let mapleader=" "
 
 " enable relativenumbering by pressing the leader key + rn
-nnoremap <leader>rn :set rnu!
+nmap <leader>rn :set rnu!<CR>
+
+" enable relativenumbering
+set rnu
 
 " Together with 'set lbr' avoids splitting words when they need to go to the next
 " line
@@ -149,9 +158,24 @@ nnoremap <C-a> <C-w>
 " map 0 to ^ in normal mode. ^ takes me to first non-white char in line
 nnoremap 0 ^
 
-" hitting F2 in normal mode now allows me to go at the end of a word 
+" hitting F2 in normal mode now allows me to go at the end of a word
 " directly in insert mode
 nnoremap <F2> ea
+
+" from yt video "VIM Movements P2: 5 moves to make you better ked"
+" highlights a region with "shift v" and then move it up or down with "shift J/K"
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" vimfugitive remap from ThePrimeagen
+nmap <leader>gh :diffget //3<CR>
+nmap <leader>gl :diffget //2<CR>
+nmap <leader>gst :G<CR>
+
+" ThePrimeagen greatest remap ever. Highlight region in visual mode, delete it
+" by pasting to the _ register. This does not change registers content and then
+" paste something in its place
+vnoremap <leader>p "_dP
 
 " Turn on syntax highlights
 syntax enable
@@ -160,11 +184,11 @@ syntax enable
 set hlsearch
 
 " When 'ignorecase' and 'smartcase' are both on, if a pattern contains an uppercase letter, it is case sensitive, otherwise, it is not. 
-" For example, /The would find only "The", while /the would find "the" or "The" etc. 
+" For example, /The would find only "The", while /the would find "the" or "The" etc.
 set ignorecase
 set smartcase
 
-" After a search hits an entry, the entry will be highlighted due to :set hlsearch. 
+" After a search hits an entry, the entry will be highlighted due to :set hlsearch.
 " So, press Space to turn off highlighting and clear any message already displayed.
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
@@ -176,16 +200,19 @@ map <Leader>n <plug>NERDTreeTabsToggle<CR>
 " To have NERDTree always open on startup
 let g:nerdtree_tabs_open_on_console_startup = 0
 
-" ------------------------------------- Solarized Config
+" ------------------------------------- Colorscheme Config
 
-if has('gui_running')
-  set background=light
-  colorscheme solarized
-else
-  colorscheme zenburn
-endif
+" if has('gui_running')
+"   set background=light
+"   colorscheme solarized
+" else
+"   colorscheme zenburn
+" endif
 
-"Solarized also ships with a dark and light theme. To make switching between them very easy (by pressing F5) add
+set background=dark
+colorscheme gruvbox
+
+" Solarized/gruvbox also ship with a dark and light theme. To make switching between them very easy (by pressing F5) add
 call togglebg#map("<F5>")
 
 " -----------------------------------------------------
@@ -197,7 +224,7 @@ set ruler
 " We also want to avoid extraneous whitespace. We can have VIM flag that for us so that it’s easy to spot – and then remove.
 " au BufRead,BufNewFile *.py,*.pyw,*.c,*.h,*.hs match BadWhitespace /\s\+$/
 
-" For the most part, you should be using UTF8 when working with Python, especially if you’re working with Python 3. 
+" For the most part, you should be using UTF8 when working with Python, especially if you’re working with Python 3.
 " Make sure VIM knows that with the following line:
 set encoding=utf-8
 
